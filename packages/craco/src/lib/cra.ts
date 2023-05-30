@@ -31,6 +31,7 @@ function resolveConfigFilePathInner(
   cracoConfig: CracoConfig,
   fileName: string
 ) {
+  // 加载 react-scripts 最终的 config 
   return require.resolve(
     path.join(
       cracoConfig.reactScriptsVersion ?? 'react-scripts',
