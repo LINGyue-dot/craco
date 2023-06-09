@@ -78,6 +78,13 @@ function removePluginsFromWebpackConfig(
   }
 }
 
+/**
+ * 用 webpack-merge 来进行直接 merge 两者的配置
+ * @param webpackConfig
+ * @param configureWebpack
+ * @param context
+ * @returns
+ */
 function giveTotalControl(
   webpackConfig: WebpackConfig,
   configureWebpack: Configure<WebpackConfig, WebpackContext>,

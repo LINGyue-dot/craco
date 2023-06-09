@@ -12,7 +12,10 @@ export function overrideWebpackDev(
   cracoConfig: CracoConfig,
   context: WebpackContext
 ) {
+
+  // react-scripts/config/webpack.config.js - development 的数据
   const craWebpackConfig = loadWebpackDevConfig(cracoConfig);
+
   const resultingWebpackConfig = mergeWebpackConfig(
     cracoConfig,
     craWebpackConfig,

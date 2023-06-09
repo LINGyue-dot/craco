@@ -59,11 +59,13 @@ export function processCracoConfig(
   cracoConfig: CracoConfig,
   context: BaseContext
 ) {
+  // 最终的 craco config 
   const resultingCracoConfig = deepMergeWithArray(
     {},
     DEFAULT_CONFIG,
     cracoConfig
   );
+  // 检测 config 的 plugins 是否正确
   ensureConfigSanity(resultingCracoConfig);
 
   return applyCracoConfigPlugins(resultingCracoConfig, context);
@@ -97,6 +99,7 @@ function getConfigPath() {
 }
 
 function getConfigAsObject(context: BaseContext) {
+  // craco.config.js 绝对路径
   const configFilePath = getConfigPath();
   log('Config file path resolved to: ', configFilePath);
   const result = explorer.load(configFilePath);
@@ -112,6 +115,7 @@ function getConfigAsObject(context: BaseContext) {
 }
 
 export function loadCracoConfig(context: BaseContext) {
+  // craco.config.js 对象数据
   const configAsObject = getConfigAsObject(context);
 
   if (configAsObject instanceof Promise) {

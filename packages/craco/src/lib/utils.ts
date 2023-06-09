@@ -16,6 +16,12 @@ export function isBoolean(value: any): value is boolean {
   return typeof value === 'boolean';
 }
 
+/**
+ * merge 并对数组进行 concat 进行合并
+ * @param dest 
+ * @param src 
+ * @returns 
+ */
 export function deepMergeWithArray(dest: any, ...src: any) {
   return mergeWith(dest, ...src, (x: any, y: any) => {
     if (isArray(x)) {

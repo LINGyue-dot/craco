@@ -19,6 +19,7 @@ const CRA_LATEST_SUPPORTED_MAJOR_VERSION = '5.0.0';
 function resolveConfigFilePath(cracoConfig: CracoConfig, fileName: string) {
   if (!envLoaded) {
     // Environment variables must be loaded before the CRA paths, otherwise they will not be applied.
+    // 先加载 react-scripts/config/env.js 加载环境变量
     require(resolveConfigFilePathInner(cracoConfig, 'env.js'));
 
     envLoaded = true;
@@ -31,7 +32,7 @@ function resolveConfigFilePathInner(
   cracoConfig: CracoConfig,
   fileName: string
 ) {
-  // 加载 react-scripts 最终的 config 
+  // 返回绝对路径
   return require.resolve(
     path.join(
       cracoConfig.reactScriptsVersion ?? 'react-scripts',
@@ -114,9 +115,15 @@ export function overrideCraPaths(
 
 /************  Webpack Dev Config  ************/
 
+/**
+ * 
+ * @param cracoConfig 
+ * @returns react-scripts/config/webpack.config.js
+ */
 function getWebpackDevConfigPath(cracoConfig: CracoConfig) {
   try {
     return {
+      //
       filepath: resolveConfigFilePath(cracoConfig, 'webpack.config.js'),
       isLegacy: false,
     };
@@ -136,7 +143,7 @@ export function loadWebpackDevConfig(cracoConfig: CracoConfig): WebpackConfig {
   if (result.isLegacy) {
     return require(result.filepath);
   }
-
+  // 加载 react-scripts/config/webpack.config.js
   return require(result.filepath)('development');
 }
 
